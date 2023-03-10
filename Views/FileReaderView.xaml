@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp2.Views.FileReaderView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maui="clr-namespace:Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+    Title="FileReaderView"
+    x:DataType="vm:FileReaderViewModel">
+
+    <ScrollView>
+
+        <VerticalStackLayout Margin="5">
+
+
+            <Entry IsReadOnly="True" Text="{Binding SelectedDirectoryPath}" />
+
+            <Button
+                Margin="2"
+                Command="{Binding SelectFolderCommand}"
+                Text="Select folder" />
+
+            <Button
+                Margin="2"
+                Command="{Binding ReadFilesInFolderCommand}"
+                Text="Read Files In folder" />
+
+
+            <Border Padding="2" Background="lightblue">
+
+                <Label Text="Files In Directory" />
+            </Border>
+
+            <ListView
+                Margin="2"
+                ItemsSource="{Binding Files}"
+                SelectedItem="{Binding SelectedFile}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label
+                                FontAttributes="Bold"
+                                Text="{Binding}"
+                                VerticalTextAlignment="Center" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Grid.Column="0" Text="File Name" />
+                <Entry Grid.Column="1" Text="{Binding FileName, FallbackValue='na'}" />
+            </Grid>
+            <Grid ColumnDefinitions="200, *">
+                <Label  Grid.Column="0" Text="File Size" />
+                <Entry Grid.Column="1" Text="{Binding FileSize, FallbackValue=0}" />
+            </Grid>
+
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Grid.Column="0" Text="File directory" />
+                <Entry Grid.Column="1" Text="{Binding FileExtension, FallbackValue='na'}" />
+            </Grid>
+            <Grid ColumnDefinitions="200, *">
+                <Label Grid.Column="0"  Text="creation time" />
+                <Entry Grid.Column="1" Text="{Binding CreationTime, FallbackValue='na'}" />
+            </Grid>       
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
